@@ -28,8 +28,10 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ pkg-config yasm ];
 
-  buildInputs = [ freetype fribidi harfbuzz ]
-    ++ lib.optional fontconfigSupport fontconfig
+  propagatedBuildInputs = [ harfbuzz ]
+    ++ lib.optional fontconfigSupport fontconfig;
+    
+  buildInputs = [ freetype fribidi ]
     ++ lib.optional stdenv.isDarwin [
       libiconv
       darwin.apple_sdk.frameworks.ApplicationServices
